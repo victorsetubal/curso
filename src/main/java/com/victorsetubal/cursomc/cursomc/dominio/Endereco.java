@@ -1,12 +1,18 @@
 package com.victorsetubal.cursomc.cursomc.dominio;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
  * Created by victorcardoso on 19/05/18.
  */
+@Entity
 public class Endereco implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String logradouro;
     private String numero;
@@ -14,8 +20,13 @@ public class Endereco implements Serializable {
     private String bairro;
     private String cep;
 
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
+    @ManyToOne
+    @JoinColumn(name = "cidade_id")
     private Cidade cidade;
 
     public Endereco() {
@@ -29,6 +40,7 @@ public class Endereco implements Serializable {
         this.bairro = bairro;
         this.cep = cep;
         this.cliente = cliente;
+        this.cidade = cidade;
     }
 
     public Integer getId() {

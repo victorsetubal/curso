@@ -1,7 +1,9 @@
 package com.victorsetubal.cursomc.cursomc.dominio;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.victorsetubal.cursomc.cursomc.dominio.enums.TipoCliente;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -12,17 +14,23 @@ import java.util.Set;
  * Created by victorcardoso on 19/05/18.
  */
 
-
+@Entity
 public class Cliente implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
     private String email;
     private String cpfOuCnpj;
     private Integer tipoCliente;
 
+    @JsonManagedReference
+    @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos = new ArrayList<>();
 
+    @ElementCollection
+    @CollectionTable(name = "TELEFONE")
     private Set<String> telefones = new HashSet<>();
 
     public Cliente() {
