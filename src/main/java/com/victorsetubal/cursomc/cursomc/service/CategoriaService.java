@@ -18,4 +18,17 @@ public class CategoriaService {
         Optional <Categoria> obj = categoriaRepository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! ID: " + id + ", Tipo:  " + Categoria.class.getName()));
     }
+
+    public Categoria inserir (Categoria categoria) {
+        return categoriaRepository.save(categoria);
+    }
+
+    public Categoria atualizar (Categoria categoria) {
+        buscar(categoria.getId());
+        return categoriaRepository.save(categoria);
+    }
+
+    public void excluir (Integer id) {
+        categoriaRepository.deleteById(id);
+    }
 }

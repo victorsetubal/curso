@@ -1,6 +1,7 @@
 package com.victorsetubal.cursomc.cursomc.dominio;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.victorsetubal.cursomc.cursomc.dominio.enums.EstadoPagamento;
 
@@ -16,7 +17,7 @@ public abstract class Pagamento {
     private Integer id;
     private Integer estado;
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "pedido_id")
     @MapsId

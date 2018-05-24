@@ -1,6 +1,6 @@
 package com.victorsetubal.cursomc.cursomc.resources;
 
-import com.victorsetubal.cursomc.cursomc.service.CidadeService;
+import com.victorsetubal.cursomc.cursomc.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,23 +9,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Created by victorcardoso on 19/05/18.
+ * Created by victorcardoso on 20/05/18.
  */
 
 @RestController
-@RequestMapping(value = "/cidades")
-public class CidadeResource {
+@RequestMapping(value = "/clientes")
+public class ClienteResource {
 
     @Autowired
-    private CidadeService cidadeService;
+    private ClienteService clienteService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> buscar (@PathVariable Integer id) {
-        return ResponseEntity.ok().body(cidadeService.buscar(id));
-    }
-
-    @RequestMapping(value = "/enderecos-numero-maior", method = RequestMethod.GET)
-    public ResponseEntity<?> buscarCidades () {
-        return ResponseEntity.ok().body(cidadeService.buscarEnderecosMaiorNumero());
+        return ResponseEntity.ok().body(clienteService.buscar(id));
     }
 }

@@ -1,5 +1,7 @@
 package com.victorsetubal.cursomc.cursomc.dominio;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -19,7 +21,7 @@ public class Estado implements Serializable {
     private Integer id;
     private String nome;
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(mappedBy = "estado")
     private List<Cidade> cidades = new ArrayList<>();
 

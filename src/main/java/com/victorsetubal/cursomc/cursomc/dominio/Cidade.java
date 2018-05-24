@@ -1,9 +1,12 @@
 package com.victorsetubal.cursomc.cursomc.dominio;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by victorcardoso on 19/05/18.
@@ -17,12 +20,12 @@ public class Cidade implements Serializable {
     private Integer id;
     private String nome;
 
-
-    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "estado_id")
     private Estado estado;
 
+    @OneToMany(mappedBy = "cidade")
+    private List<Endereco> endereco = new ArrayList<>();
 
     public Cidade() {
     }
@@ -31,6 +34,14 @@ public class Cidade implements Serializable {
         this.id = id;
         this.nome = nome;
         this.estado = estado;
+    }
+
+    public List<Endereco> getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(List<Endereco> endereco) {
+        this.endereco = endereco;
     }
 
     public Integer getId() {
